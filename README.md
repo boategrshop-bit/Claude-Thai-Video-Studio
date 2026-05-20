@@ -261,43 +261,9 @@ npx.cmd hyperframes render --format webm -o render.webm
 
 ---
 
-## Troubleshooting
+## ติดปัญหา?
 
-### ❌ Subtitle พื้นหลังดำทับ video
-
-ffmpeg ใช้ native VP9 decoder ที่ไม่รองรับ alpha — ต้องบังคับ libvpx-vp9:
-
-```bash
-ffmpeg -i base.mp4 -vcodec libvpx-vp9 -i render.webm ...
-```
-
-(Claude ในนี้ทำถูกอัตโนมัติแล้ว แต่ถ้า run เองต้องระวัง)
-
-### ❌ `npx` หา hyperframes ไม่เจอ
-
-ใช้ `npx.cmd` แทน `npx` ใน PowerShell:
-
-```powershell
-npx.cmd hyperframes lint --verbose
-```
-
-### ❌ Python อ่านภาษาไทยไม่ได้ (UnicodeDecodeError)
-
-```powershell
-$env:PYTHONUTF8 = "1"
-$env:PYTHONIOENCODING = "utf-8"
-```
-
-### ❌ ffmpeg หาไม่เจอ
-
-```powershell
-$env:PATH = "C:\path\to\ffmpeg\bin;$env:PATH"
-```
-
-### ❌ Subtitle ผิดหลัง ๆ ทุก group
-
-Bug จาก ๆ (mai yamok) — scripts ในนี้แก้แล้ว ถ้าเขียน gen_composition.py เองต้องระวัง
-(ดู CAPTION_PHILOSOPHY.md หัวข้อ "ๆ Bug Fix")
+ถาม Claude โดยตรงใน Claude Code ได้เลย — Claude รู้ context ของ repo นี้ทั้งหมด
 
 ---
 
