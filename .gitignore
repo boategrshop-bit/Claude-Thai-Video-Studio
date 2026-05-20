@@ -1,0 +1,22 @@
+# API keys
+.env
+
+# Raw footage & rendered outputs (too large for git)
+raw_media/*
+!raw_media/.gitkeep
+video_projects/*
+!video_projects/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.uv/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
