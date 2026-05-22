@@ -1,0 +1,162 @@
+{
+  "duration": 92.24,
+  "silences": [
+    {
+      "start": 0.0,
+      "end": 4.642766,
+      "duration": 4.642766
+    },
+    {
+      "start": 5.958639,
+      "end": 8.718322,
+      "duration": 2.759683
+    },
+    {
+      "start": 11.370227,
+      "end": 11.910839,
+      "duration": 0.540612
+    },
+    {
+      "start": 12.688254,
+      "end": 13.345034,
+      "duration": 0.65678
+    },
+    {
+      "start": 13.585057,
+      "end": 14.856417,
+      "duration": 1.271361
+    },
+    {
+      "start": 15.964603,
+      "end": 20.226961,
+      "duration": 4.262358
+    },
+    {
+      "start": 21.576644,
+      "end": 23.747007,
+      "duration": 2.170363
+    },
+    {
+      "start": 25.67585,
+      "end": 26.257959,
+      "duration": 0.582109
+    },
+    {
+      "start": 27.171088,
+      "end": 27.579161,
+      "duration": 0.408073
+    },
+    {
+      "start": 28.763152,
+      "end": 29.281293,
+      "duration": 0.518141
+    },
+    {
+      "start": 30.478844,
+      "end": 31.124989,
+      "duration": 0.646145
+    },
+    {
+      "start": 32.374444,
+      "end": 33.393673,
+      "duration": 1.019229
+    },
+    {
+      "start": 34.491723,
+      "end": 35.211156,
+      "duration": 0.719433
+    },
+    {
+      "start": 36.234807,
+      "end": 40.509274,
+      "duration": 4.274467
+    },
+    {
+      "start": 42.565238,
+      "end": 43.122766,
+      "duration": 0.557528
+    },
+    {
+      "start": 44.985533,
+      "end": 46.281043,
+      "duration": 1.29551
+    },
+    {
+      "start": 46.914195,
+      "end": 48.722222,
+      "duration": 1.808027
+    },
+    {
+      "start": 49.576848,
+      "end": 50.272744,
+      "duration": 0.695896
+    },
+    {
+      "start": 53.137324,
+      "end": 53.770522,
+      "duration": 0.633197
+    },
+    {
+      "start": 55.361066,
+      "end": 56.907438,
+      "duration": 1.546372
+    },
+    {
+      "start": 59.439728,
+      "end": 59.850227,
+      "duration": 0.410499
+    },
+    {
+      "start": 61.075737,
+      "end": 62.297211,
+      "duration": 1.221474
+    },
+    {
+      "start": 63.35483,
+      "end": 64.141565,
+      "duration": 0.786735
+    },
+    {
+      "start": 65.446803,
+      "end": 67.115397,
+      "duration": 1.668594
+    },
+    {
+      "start": 70.733379,
+      "end": 71.296531,
+      "duration": 0.563152
+    },
+    {
+      "start": 73.1639,
+      "end": 76.032766,
+      "duration": 2.868866
+    },
+    {
+      "start": 77.631156,
+      "end": 79.687574,
+      "duration": 2.056417
+    },
+    {
+      "start": 80.274036,
+      "end": 80.754943,
+      "duration": 0.480907
+    },
+    {
+      "start": 83.672585,
+      "end": 84.222789,
+      "duration": 0.550204
+    },
+    {
+      "start": 86.997959,
+      "end": 89.331519,
+      "duration": 2.33356
+    },
+    {
+      "start": 91.503265,
+      "end": 92.22966,
+      "duration": 0.726395
+    }
+  ],
+  "stderr": "\n[Parsed_silencedetect_0 @ 000002091fb13e00] silence_end: 89.331519 | silence_duration: 2.33356\n[Parsed_silencedetect_0 @ 000002091fb13e00] silence_start: 91.503265\n[Parsed_silencedetect_0 @ 000002091fb13e00] silence_end: 92.22966 | silence_duration: 0.726395\n[out#0/null @ 000002091d7d2880] video:1145KiB audio:15888KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown\nframe= 2765 fps=0.0 q=-0.0 Lsize=N/A time=00:01:32.22 bitrate=N/A speed= 222x elapsed=0:00:00.41    \n",
+  "source": "raw_media/demo.mp4"
+}

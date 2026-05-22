@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=576, height=1024" />
+    <title>Thai Captions</title>
+    <style>
+      @font-face {
+        font-family: "Noto Sans Thai";
+        font-weight: 800;
+        font-style: normal;
+        src: url("fonts/NotoSansThai800.woff2") format("woff2");
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      html, body {
+        width: 576px; height: 1024px;
+        margin: 0; overflow: hidden;
+        background: transparent;
+      }
+      #highlight {
+        pointer-events: none;
+        position: relative;
+        width: 576px; height: 1024px;
+        overflow: hidden;
+        background: transparent;
+      }
+      .hl-overlay {
+        position: absolute; inset: 0;
+        background: transparent; z-index: 1;
+        pointer-events: none;
+      }
+      #hl-container {
+        position: absolute; inset: 0;
+        z-index: 10; pointer-events: none;
+      }
+      .hl-group {
+        position: absolute;
+        bottom: 200px; left: 0; width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 0;
+        padding: 0 28px;
+        opacity: 0;
+        visibility: hidden;
+      }
+      .hl-word {
+        font-family: "Noto Sans Thai", sans-serif;
+        font-weight: 800;
+        font-size: 46px;
+        color: #ffffff;
+        display: inline-block;
+        line-height: 1.15;
+        position: relative;
+        padding: 4px 10px 6px;
+        text-shadow: 0 4px 12px rgba(0,0,0,0.55);
+        transform-origin: 50% 58%;
+        will-change: transform, filter;
+      }
+      .hl-word-bg {
+        position: absolute; inset: 0;
+        background: linear-gradient(135deg, #ff1745 0%, #df1238 100%);
+        border-radius: 8px;
+        box-shadow: 0 8px 20px rgba(229,20,58,0.32);
+        opacity: 0;
+        transform: scaleX(0);
+        transform-origin: 0% 50%;
+        z-index: -1;
+      }
+      .hl-word-text { position: relative; z-index: 1; }
+    </style>
+  </head>
+  <body>
+    <div
+      id="highlight"
+      data-composition-id="caption-highlight"
+      data-timeline-locked
+      data-start="0"
+      data-duration="43.34"
+      data-fps="30"
+      data-width="576"
+      data-height="1024"
+    >
+      <div class="hl-overlay"></div>
+      <div id="hl-container"></div>
+    </div>
+
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+
+        var _fitCanvas = document.createElement("canvas");
+        var _fitCtx = _fitCanvas.getContext("2d");
+        function fitFontSize(text, baseFontSize, fontWeight, fontFamily, maxWidth) {
+          var size = baseFontSize;
+          var minSize = Math.floor(baseFontSize * 0.45);
+          while (size > minSize) {
+            _fitCtx.font = fontWeight + " " + size + "px " + fontFamily;
+            if (_fitCtx.measureText(text).width <= maxWidth) return size;
+            size -= 2;
+          }
+          return minSize;
+        }
+
+        var WORDS = [
+  {text:"คลิป",start:0.0,end:0.44},
+  {text:"นี้",start:0.44,end:0.62},
+  {text:"นะ",start:0.62,end:0.76},
+  {text:"ครับผม",start:0.76,end:1.08},
+  {text:"จะ",start:1.08,end:1.26},
+  {text:"ให้",start:1.26,end:1.52},
+  {text:"Claude",start:1.52,end:1.8},
+  {text:"ตัดต่อ",start:1.8,end:2.14},
+  {text:"วีดีโอ",start:2.14,end:2.56},
+  {text:"นี้",start:2.56,end:2.88},
+  {text:"นะ",start:2.88,end:2.98},
+  {text:"ครับ",start:2.98,end:3.08},
+  {text:"ผม",start:3.08,end:3.28},
+  {text:"เป็น",start:3.28,end:3.42},
+  {text:"คนพูด",start:3.42,end:3.68},
+  {text:"ไม่",start:3.68,end:3.8},
+  {text:"เก่ง",start:3.8,end:4.14},
+  {text:"นะ",start:4.14,end:4.42},
+  {text:"ครับ",start:4.7,end:4.94},
+  {text:"ออก",start:4.94,end:5.26},
+  {text:"กล้อง",start:5.26,end:5.46},
+  {text:"ไม่",start:5.46,end:5.62},
+  {text:"เป็น",start:5.62,end:5.92},
+  {text:"นะ",start:5.92,end:6.08},
+  {text:"ครับ",start:6.08,end:6.5600000000000005},
+  {text:"บางที",start:6.8,end:7.28},
+  {text:"ก็",start:7.28,end:7.4},
+  {text:"นึกไม่ออก",start:7.4,end:7.82},
+  {text:"ว่า",start:7.82,end:7.98},
+  {text:"จะ",start:7.98,end:8.04},
+  {text:"พูด",start:8.04,end:8.22},
+  {text:"อะไร",start:8.22,end:8.4},
+  {text:"แต่",start:8.4,end:8.8},
+  {text:"Claude",start:8.8,end:9.12},
+  {text:"ช่วย",start:9.12,end:9.36},
+  {text:"เรา",start:9.36,end:9.48},
+  {text:"ได้",start:9.48,end:9.72},
+  {text:"ครับ",start:9.72,end:9.92},
+  {text:"ก็",start:9.92,end:10.22},
+  {text:"คือ",start:10.22,end:10.52},
+  {text:"มัน",start:11.0,end:11.28},
+  {text:"สามารถ",start:11.28,end:11.7},
+  {text:"ตัด",start:11.7,end:12.12},
+  {text:"ตอนที่",start:12.12,end:12.7},
+  {text:"เรา",start:12.7,end:12.86},
+  {text:"นึกได้",start:12.86,end:13.5},
+  {text:"นะ",start:13.5,end:13.58},
+  {text:"ครับ",start:13.58,end:13.7},
+  {text:"สมมุติ",start:13.7,end:14.08},
+  {text:"ว่า",start:14.08,end:14.16},
+  {text:"ผม",start:14.16,end:14.22},
+  {text:"ไม่",start:14.22,end:14.42},
+  {text:"รู้",start:14.42,end:14.64},
+  {text:"จะ",start:14.64,end:14.78},
+  {text:"พูด",start:14.78,end:15.88},
+  {text:"เรื่อง",start:15.88,end:16.04},
+  {text:"อะไร",start:16.04,end:16.2},
+  {text:"ใน",start:16.2,end:16.4},
+  {text:"วันนี้",start:16.4,end:16.74},
+  {text:"นะ",start:16.74,end:16.86},
+  {text:"ครับ",start:16.86,end:17.06},
+  {text:"ผม",start:17.2,end:17.48},
+  {text:"อาจจะ",start:18.06,end:18.36},
+  {text:"อ่าน",start:18.36,end:18.5},
+  {text:"สคริปต์",start:18.5,end:18.92},
+  {text:"นะ",start:18.92,end:19.02},
+  {text:"ครับ",start:19.02,end:19.18},
+  {text:"อ้อ",start:19.18,end:19.52},
+  {text:"วันนี้",start:19.54,end:19.78},
+  {text:"นะ",start:19.78,end:19.82},
+  {text:"ครับ",start:19.82,end:20.02},
+  {text:"เรา",start:20.08,end:20.14},
+  {text:"จะ",start:20.14,end:20.24},
+  {text:"มา",start:20.24,end:20.34},
+  {text:"พูด",start:20.34,end:20.56},
+  {text:"เรื่อง",start:20.56,end:20.86},
+  {text:"Claude",start:20.86,end:21.24},
+  {text:"ครับ",start:21.24,end:21.46},
+  {text:"เกี่ยวกับ",start:21.46,end:22.2},
+  {text:"การ",start:22.2,end:22.34},
+  {text:"ที่",start:22.34,end:22.52},
+  {text:"ใช้",start:22.52,end:22.74},
+  {text:"Claude",start:22.74,end:22.94},
+  {text:"ตัดต่อ",start:22.94,end:23.26},
+  {text:"วีดีโอ",start:23.26,end:23.58},
+  {text:"นะ",start:23.58,end:23.8},
+  {text:"แบบนี้",start:23.8,end:24.34},
+  {text:"นะ",start:24.34,end:24.54},
+  {text:"ครับ",start:24.54,end:24.92},
+  {text:"ดู",start:24.96,end:26.6},
+  {text:"สิ",start:26.6,end:26.72},
+  {text:"ว่า",start:26.72,end:27.04},
+  {text:"นะ",start:27.04,end:27.16},
+  {text:"ครับ",start:27.16,end:27.44},
+  {text:"น้อง",start:27.48,end:28.16},
+  {text:"จะ",start:28.16,end:28.3},
+  {text:"ตัด",start:28.3,end:28.5},
+  {text:"ออกมา",start:28.5,end:28.7},
+  {text:"ได้",start:28.7,end:28.96},
+  {text:"แค่",start:28.96,end:29.08},
+  {text:"ไหน",start:29.08,end:29.28},
+  {text:"นะ",start:29.28,end:29.38},
+  {text:"ครับ",start:29.38,end:29.56},
+  {text:"จะ",start:29.56,end:29.72},
+  {text:"ตัด",start:29.72,end:30.0},
+  {text:"ใน",start:30.0,end:30.22},
+  {text:"ส่วน",start:30.22,end:30.38},
+  {text:"ของ",start:30.38,end:30.52},
+  {text:"ที่",start:30.52,end:30.7},
+  {text:"เรา",start:30.7,end:30.96},
+  {text:"ก้ม",start:30.96,end:31.76},
+  {text:"ไป",start:31.76,end:31.9},
+  {text:"อ่าน",start:31.9,end:32.08},
+  {text:"สค",start:32.08,end:32.2},
+  {text:"ริ",start:32.2,end:32.36},
+  {text:"ป",start:32.36,end:32.56},
+  {text:"ได้",start:32.56,end:32.78},
+  {text:"ไหม",start:32.78,end:33.08},
+  {text:"นะ",start:33.08,end:33.18},
+  {text:"ครับ",start:33.28,end:34.98},
+  {text:"หรือ",start:34.98,end:35.4},
+  {text:"ใน",start:35.4,end:35.42},
+  {text:"ช่วง",start:35.42,end:35.62},
+  {text:"ที่",start:35.62,end:35.78},
+  {text:"เรา",start:35.78,end:35.96},
+  {text:"Dead",start:35.96,end:36.16},
+  {text:"air",start:36.16,end:36.4},
+  {text:"หรือ",start:36.4,end:36.54},
+  {text:"ใน",start:36.54,end:36.64},
+  {text:"ช่วง",start:36.64,end:36.88},
+  {text:"ที่",start:36.88,end:37.14},
+  {text:"เรา",start:37.14,end:37.24},
+  {text:"ที่เรา",start:37.24,end:37.72},
+  {text:"พูด",start:37.72,end:37.8},
+  {text:"หรือ",start:37.8,end:38.0},
+  {text:"มี",start:38.0,end:38.1},
+  {text:"เทค",start:38.56,end:38.7},
+  {text:"ที่",start:38.7,end:38.92},
+  {text:"ไม่ดี",start:38.92,end:39.1},
+  {text:"นะครับ",start:39.1,end:39.38},
+  {text:"เช่น",start:39.38,end:39.66},
+  {text:"พูด",start:40.0,end:40.12},
+  {text:"ไม่รู้",start:40.12,end:40.3},
+  {text:"เรื่อง",start:40.3,end:40.5},
+  {text:"อ่ะ",start:40.5,end:40.7},
+  {text:"ไป",start:41.08,end:41.22},
+  {text:"เรียนรู้",start:41.22,end:41.6},
+  {text:"พร้อมกัน",start:41.6,end:42.02},
+  {text:"นะ",start:42.02,end:42.08},
+  {text:"ครับ",start:42.08,end:42.36},
+  {text:"กับ",start:42.36,end:42.78},
+  {text:"คอร์ส",start:42.78,end:43.06},
+  {text:"นี้",start:43.06,end:43.14},
+  {text:"ครับ",start:43.14,end:43.34}
+];
+
+        var RAW_GROUPS = [
+  [0,5],
+  [6,9],
+  [10,11],
+  [12,17],
+  [18,18],
+  [19,24],
+  [25,29],
+  [30,31],
+  [32,36],
+  [37,39],
+  [40,44],
+  [45,47],
+  [48,54],
+  [55,59],
+  [60,61],
+  [62,66],
+  [67,73],
+  [74,77],
+  [78,81],
+  [82,85],
+  [86,92],
+  [93,98],
+  [99,105],
+  [106,112],
+  [113,120],
+  [121,126],
+  [127,131],
+  [132,135],
+  [136,140],
+  [141,144],
+  [145,148],
+  [149,153]
+];
+
+        var GROUPS = RAW_GROUPS.map(function (pair, gi) {
+          var ws = pair[0], we = pair[1];
+          var nextStart = gi + 1 < RAW_GROUPS.length ? WORDS[RAW_GROUPS[gi+1][0]].start : 41.15;
+          var gEnd = Math.min(WORDS[we].end + 0.5, nextStart - 0.05);
+          return { wordStart: ws, wordEnd: we, start: WORDS[ws].start, end: gEnd };
+        });
+
+        var container = document.getElementById("hl-container");
+        var tl = gsap.timeline({ paused: true });
+
+        GROUPS.forEach(function (g, gi) {
+          var groupWords = WORDS.slice(g.wordStart, g.wordEnd + 1);
+          var grp = document.createElement("div");
+          grp.className = "hl-group";
+          grp.id = "hl-grp-" + gi;
+
+          var groupText = groupWords.map(function(w){ return w.text; }).join(" ");
+          var computedSize = fitFontSize(groupText, 46, "800", "'Noto Sans Thai'", 520);
+
+          groupWords.forEach(function (w, i) {
+            var wi = g.wordStart + i;
+            var wordEl = document.createElement("span");
+            wordEl.className = "hl-word";
+            wordEl.id = "hl-w-" + wi;
+            wordEl.style.fontSize = computedSize + "px";
+
+            var bgEl = document.createElement("span");
+            bgEl.className = "hl-word-bg";
+            bgEl.id = "hl-bg-" + wi;
+
+            var textEl = document.createElement("span");
+            textEl.className = "hl-word-text";
+            textEl.textContent = w.text;
+
+            wordEl.appendChild(bgEl);
+            wordEl.appendChild(textEl);
+            grp.appendChild(wordEl);
+          });
+
+          container.appendChild(grp);
+
+          tl.set(grp, { visibility: "visible" }, g.start);
+          tl.fromTo(grp, { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power2.out" }, g.start);
+
+          groupWords.forEach(function (w, i) {
+            var wi = g.wordStart + i;
+            var bgEl = document.getElementById("hl-bg-" + wi);
+            var wordEl = document.getElementById("hl-w-" + wi);
+
+            tl.to(bgEl, { opacity: 1, scaleX: 1, duration: 0.15, ease: "power2.out" }, w.start);
+            tl.to(wordEl, { filter: "brightness(1.15) drop-shadow(0 0 6px rgba(255,220,0,0.7))", duration: 0.08, ease: "power2.out" }, w.start);
+            tl.to(wordEl, { filter: "brightness(1)", duration: 0.16, ease: "power2.out" }, w.start + 0.08);
+            tl.to(bgEl, { opacity: 0, scaleX: 1.02, duration: 0.1, ease: "power2.in" }, w.end);
+            tl.set(bgEl, { scaleX: 0 }, w.end + 0.1);
+          });
+
+          tl.to(grp, { opacity: 0, duration: 0.1, ease: "power2.in" }, g.end - 0.1);
+          tl.set(grp, { opacity: 0, visibility: "hidden" }, g.end);
+        });
+
+        tl.seek(0);
+        window.__timelines["caption-highlight"] = tl;
+      })();
+    </script>
+  </body>
+</html>

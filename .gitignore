@@ -4,8 +4,17 @@
 # Raw footage & rendered outputs (too large for git)
 raw_media/*
 !raw_media/.gitkeep
+
+# Ignore all video_projects except demo
 video_projects/*
 !video_projects/.gitkeep
+!video_projects/demo
+
+# Inside demo: ignore media files only
+video_projects/demo/**/*.wav
+video_projects/demo/**/*.mp4
+video_projects/demo/**/*.webm
+video_projects/demo/**/*.mov
 
 # Python
 __pycache__/

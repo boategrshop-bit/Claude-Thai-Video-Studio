@@ -1,0 +1,15 @@
+{
+  "source": "D:/demo/Claude-Thai-Video-Studio/raw_media/demo.mp4",
+  "segments": [
+    {"start": 8.30,  "end": 11.38, "label": "intro"},
+    {"start": 11.72, "end": 13.58, "label": "not_good_speaker"},
+    {"start": 14.62, "end": 16.48, "label": "not_good_camera"},
+    {"start": 19.96, "end": 21.56, "label": "cant_think"},
+    {"start": 23.44, "end": 28.74, "label": "course_helps"},
+    {"start": 29.00, "end": 34.48, "label": "read_script"},
+    {"start": 40.26, "end": 44.88, "label": "comeback"},
+    {"start": 45.98, "end": 59.42, "label": "challenge_ai"},
+    {"start": 66.72, "end": 70.56, "label": "bad_takes"},
+    {"start": 89.21, "end": 91.47, "label": "ending"}
+  ]
+}
